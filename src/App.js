@@ -30,8 +30,6 @@ class App extends Component {
     ctx.drawImage(img,150,100,img.width, img.height);
   }
 
-
-
   render() {
     return (
       <div className="App">
