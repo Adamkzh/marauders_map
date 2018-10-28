@@ -7,8 +7,8 @@ var targetData = {
 };
 
 function loop(){
-    targetData.coordinate.x = targetData.coordinate.x + 2;
-    targetData.time = targetData.time + 2;
+    targetData.coordinate.x = targetData.coordinate.x + 1.2;
+    targetData.time = targetData.time + 1.2;
 }
 function getData(){
     loop();

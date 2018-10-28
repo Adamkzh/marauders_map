@@ -22,4 +22,11 @@ body {
 .stepImage {
   width:1.5%;
   height:1.5%;
+  animation-name: over;
+  animation-duration: 1s;
+}
+
+@keyframes over {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
