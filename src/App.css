@@ -3,8 +3,13 @@
   background-image: url("./img/\ map.png");
   background-size:     cover;                    
   background-repeat:   no-repeat;
-  background-position: center center;  
-
+  background-position: center center;
+  position:fixed !important;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
 }
 
 body { 
@@ -13,6 +18,8 @@ body {
   margin: 0;
 }
 
-#canvas {
-  display:block;
+
+.stepImage {
+  width:1.5%;
+  height:1.5%;
 }

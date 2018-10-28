@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import func from './data'
-
-var CANVAS_WIDTH = window.innerWidth;
-var CANVAS_HEIGHT = window.innerHeight;
-
-var canvas;
-var ctx;
+import footImage from './img/foot.svg'
 
 var img = new Image();
-img.src = "http://www.clipartbest.com/cliparts/nTB/pK7/nTBpK7GTA.svg";
+img.src = footImage;
 img.width = img.width *0.015;
 img.height = img.height *0.015;
-
+// let flag = true;
 
 class App extends Component {
   constructor() {
@@ -23,14 +18,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    canvas = document.getElementById('canvas');
-    if (canvas && canvas.getContext) {
-      ctx = canvas.getContext('2d');
-      canvas.width = CANVAS_WIDTH;
-      canvas.height = CANVAS_HEIGHT;
-      this.step();
-    }
-
     setInterval(this.loadData, 1000);
   }
 
@@ -41,7 +28,7 @@ class App extends Component {
       y : data.coordinate.y,
     }
     var tempStemps = this.state.steps;
-    if(tempStemps.length > 4){
+    if(tempStemps.length > 8){
       tempStemps.shift();
     }
     tempStemps.push(coordinate);
@@ -52,21 +39,43 @@ class App extends Component {
   }
 
   step = () =>{
-    var temp = this.state.steps;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let temp = this.state.steps;
+    let imageArr =[];
+
     for(let i = 0; i < temp.length; i++){
-      let x = window.innerWidth* 0.03 * temp[i].x;
-      let y = window.innerHeight * 0.03 * temp[i].y;
-      console.log(x);
-      console.log(y);
-      ctx.drawImage(img,x,y,img.width, img.height);
+      imageArr.push({
+        src:footImage,
+        key: i,
+        x: temp[i].x,
+        y: temp[i].y
+      });
+
     }
+
+    var res = [];
+    for(let i = 0; i < imageArr.length; i++){
+      let item = imageArr[i];
+      let footstyle = {
+        left: item.x +'%',
+        top: (item.y + 2) +'%',
+        position: 'absolute',
+        transform: 'rotate(170deg)',
+      }
+      if(i % 2 !== 0){
+        footstyle.transform = 'rotateY(180deg)';
+        footstyle.top = item.y +'%';
+      }
+      res.push(<img src={item.src} style={footstyle} className='stepImage' alt= {item.key} key ={item.key}/>)
+    }
+    return res;
   }
 
   render() {
     return (
       <div className="App">
-      <canvas id='canvas'></canvas>
+      <div>{
+        this.step()
+      }</div>
       </div>
     );
   }
